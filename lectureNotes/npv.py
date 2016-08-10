@@ -1,12 +1,13 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-class npvSample():
+class npvSampleBank():
     def __init__(self, givenRate=0.2, givenValue=1):
-        self.rate = givenRate
+        self.givenRate = givenRate
         self.givenValue = givenValue
 
     def getOAValue(self, youthValue):
+        # assuming there are only two phases: youth phase and old age phase
         oldAgeValue = 1.2 * (self.givenValue - youthValue)
         return oldAgeValue
 
@@ -16,7 +17,7 @@ class npvSample():
         for value in youthValue:
             oldAgeValue.append(self.getOAValue(value))
 
-        legdStr = 'Budget Constraint, rate=' + str(self.rate)
+        legdStr = 'Budget Constraint, rate=' + str(self.givenRate)
         plt.plot(youthValue, oldAgeValue,'k', label=legdStr)
         plt.xlabel('Consumption Youth')
         plt.ylabel('Consumption Old Age')
@@ -26,5 +27,5 @@ class npvSample():
         plt.show()
 
 if __name__ == "__main__":
-    sample1 = npvSample()
-    sample1.demoBudgetCont()
+    bankOnly = npvSampleBank()
+    bankOnly.demoBudgetCont()
