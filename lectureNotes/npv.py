@@ -1,18 +1,24 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-class npvSampleBank():
-    def __init__(self, givenRate=0.2, givenValue=1):
+class npvBankOnly():
+    def __init__(self, givenRate=0.2, givenValue=1.0):
         self.givenRate = givenRate
         self.givenValue = givenValue
 
     def getOAValue(self, youthValue):
-        # assuming there are only two phases: youth phase and old age phase
-        oldAgeValue = 1.2 * (self.givenValue - youthValue)
+        '''
+        Calculating future (old age here) value, given present value (PV).
+        assuming there are only two phases: youth phase and old age phase
+        and the bank is the only oppertunity for this person to mainipulate
+        his money. The line functions as mapping the value of money between now
+        and future (old age here).
+        '''
+        oldAgeValue = (1.0 + self.givenRate) * (self.givenValue - youthValue)
         return oldAgeValue
 
     def demoBudgetCont(self):
-        youthValue = np.linspace(0.0, 1.0, 10)
+        youthValue = np.linspace(0.0, self.givenValue, 10)
         oldAgeValue = []
         for value in youthValue:
             oldAgeValue.append(self.getOAValue(value))
@@ -27,5 +33,5 @@ class npvSampleBank():
         plt.show()
 
 if __name__ == "__main__":
-    bankOnly = npvSampleBank()
+    bankOnly = npvBankOnly()
     bankOnly.demoBudgetCont()
