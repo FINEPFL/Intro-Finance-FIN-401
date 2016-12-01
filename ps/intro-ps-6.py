@@ -34,13 +34,22 @@ def parser(filename):
 ibm_r, SP500_rate = parser('ibm.csv')
 us_risk_free_rate = 0.77/365
 SP500_rate[:] = [x * 100 - us_risk_free_rate for x in SP500_rate]
+ibm_r[:] = [x * 100 - us_risk_free_rate for x in ibm_r]
+
 slope_us, intercept_us, _, _, _ = lr(SP500_rate, ibm_r)
 print slope_us, intercept_us
-print np.var(ibm_r)/np.cov(SP500_rate, ibm_r)[1,1]
+print np.cov(SP500_rate, ibm_r)[1,1]/np.var(SP500_rate)
 
 swisscom_r, SMI_rate = parser('swisscom.csv')
 swiss_risk_free_rate = -0.8
 SMI_rate[:] = [x * 100 - swiss_risk_free_rate for x in SMI_rate]
+swisscom_r[:] = [x * 100 - us_risk_free_rate for x in swisscom_r]
+
 slope_swi, intercept_swi, _, _, _ = lr(SMI_rate, swisscom_r)
 print slope_swi, intercept_swi
-print np.var(swisscom_r)/np.cov(SMI_rate, swisscom_r)[1,1]
+print np.cov(SMI_rate, swisscom_r)[1,1]/np.var(SMI_rate)
+
+
+
+
+#
