@@ -39,4 +39,4 @@ if __name__ == "__main__":
     R_revenue_list = [0.39, 0.57, 0.14, 0.23, 4.89, 1.05]
 
     R_weighted_releved_beta = getRelevedBeta(R_rawbeta_list, R_leverage_list, tarLev_Lodge, R_revenue_list)
-    print "Lodge weighted releveraged beta:", R_weighted_releved_beta
+    print "Restaurant weighted releveraged beta:", R_weighted_releved_beta
